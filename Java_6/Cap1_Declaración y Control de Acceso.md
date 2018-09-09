@@ -107,3 +107,20 @@ Antes de adentrarnos en la declaración de clases, demos un rápido repaso de la
 - Las declaraciones ***import*** y ***package*** aplican para todas clases dentro de un archivo de código. Es decir no pueden existir multiples declaraciones de clases en un unico archivo de código y que tengan diferentes paquetes o usar usar distintos ***imports**.
 - Un archivo de código puede tener más de una clase no ***public***.
 - Los archivos que no tengan una clase ***public*** pueden ser nombras con un nombre que no coincida con ninguna de las clases declaradas dentro de ella.
+
+### Declaración de Clases y Modificadores
+El siguiente código es una declaración de una clase cualquiera:
+```java
+class AnyClass {}
+```
+Este código compilara perfectamente, pero tambien se pueden agregar modificadores antes de la declaración de la clase.
+Los modificadores tienen 2 categorias:
+- **Modificadores de Acceso:** *public*, *protected* y *private*.
+- **Modificadores de no acceso:** *strictfp*, *final* y *abstract*.
+
+A continuación veremos los modificadores de acceso y aprenderemos como permitir o restringir el acceso a las clases que creemos. El control de acceso en Java es un poco complicado ya que **hay 4 niveles de acceso pero solo 3 modificadores**. El cuarto nivel de acceso llamado ***default*** o ***package access*** es el que se usa cuando no utilizamos ninguno de los otros 3 modificadores. En otras palabras, ***toda clase, método, variable que declaremos tienen un control de acceso explicitamente uno (public, protected o private) o no (default)***.
+
+Sin embargo una *clase* solo puede ser declarada como *public* o *default*, los otros 2 modificadores no marcan ninguna diferencia para una clase.
+
+### Acceso a una clase
+Cuando decimos que el codigo de una clase (Clase A) tiene acceso a otra clase (Clase B), 
