@@ -98,13 +98,13 @@ ___
 Cuando escribimos código Java, escribiremos Clases o Interfaces. Dentro de estas clases, como ya sabemos, habrá variables y métodos. Como declaremos las clases, variables y métodos afectará dramaticamente el comportamiento del código de la aplicación. Por ejemplo un método ***public*** puede ser accedido desde cualquier parte del código de nuestra aplicación. Para este fin estudiaremos las formas en que podremos declarar y modificar (o no) una clase.
 
 ### Reglas de Declaración para Archivos de Código
-Antes de adentrarnos en la declaración de clases, demos un rápido repaso de las reglas asociadas con la declaración, la importación de declaraciones y paquetes en un archivo fuente.
+Antes de adentrarnos en la declaración de clases, demos un rápido repaso de las reglas asociadas con la declaración, la importación de sentencias y paquetes en un archivo fuente.
 - Solo puede haber una clase ***public*** por archivo fuente.
 - Los comentarios pueden aparecer al principio o al final de cualquier línea de código en el archivo fuente.
 - Si hay una clase ***public*** en el archivo fuente, el nombre del archivo debe ser el mismo que de la clase ***public***.
-- Si la clase es parte de un paquete, la declaración del paquete debe ser la primera linea del código fuente, antes incluso que de cualquier ***import***.
-- Si hay declaraciones ***import***, estas deben ir entre la declaración del paquete y la declaración de la clase. Si no hay declaración de paquete, las primeras lineas de código deben ser las declaraciones ***import***. Si no hay declaraciones ***package*** o ***import***, la declaración de la clase debe ser la primera linea del código.
-- Las declaraciones ***import*** y ***package*** aplican para todas clases dentro de un archivo de código. Es decir no pueden existir multiples declaraciones de clases en un unico archivo de código y que tengan diferentes paquetes o usar usar distintos ***imports**.
+- Si la clase es parte de un paquete, la sentencia del paquete debe ser la primera linea del código fuente, antes incluso que de cualquier ***import***.
+- Si hay sentencias ***import***, estas deben ir entre la sentencia del paquete y la declaración de la clase. Si no hay declaración de paquete, las primeras lineas de código deben ser las sentencias ***import***. Si no hay sentencias ***package*** o ***import***, la declaración de la clase debe ser la primera linea del código.
+- Las sentecias ***import*** y ***package*** aplican para todas clases dentro de un archivo de código. Es decir no pueden existir multiples declaraciones de clases en un unico archivo de código y que tengan diferentes paquetes o usar usar distintos ***imports**.
 - Un archivo de código puede tener más de una clase no ***public***.
 - Los archivos que no tengan una clase ***public*** pueden ser nombras con un nombre que no coincida con ninguna de las clases declaradas dentro de ella.
 
@@ -123,4 +123,70 @@ A continuación veremos los modificadores de acceso y aprenderemos como permitir
 Sin embargo una *clase* solo puede ser declarada como *public* o *default*, los otros 2 modificadores no marcan ninguna diferencia para una clase.
 
 ### Acceso a una clase
-Cuando decimos que el codigo de una clase (Clase A) tiene acceso a otra clase (Clase B), 
+Cuando decimos que el codigo de una clase (Clase A) tiene acceso a otra clase (Clase B), quiere decir que A puede hacer una de 3 tres cosas:
+- Crea una instancia de la clase B.
+- Hereda o extiende de la clase B.
+- Acceder a ciertos métodos y variables dentro de la clase B, dependiendo del nivel de acceso de estos.
+
+En la practica, *acceso* significa *visibilidad*. Si la clase A no puede ver a la clase B, el nivel de acceso de los métodos y variables de la clase B no inportan ya que la clase A no tiene manera de acceder a ellos.
+
+### Acceso por Defecto (Default access)
+Una clase con acceso por defecto, no tiene un modificador que preceda a su declaración. Pensemos en el acceso por defecto como un acceso a nivel de paquete (*package*), porque una clase con *default access* solo puede ser vista por otras clases que esten dentro del mismo paquete. Por ejemplo si la clase A y B estan en distintos paquetes y la clase A tiene *default access*, la clase B no podra crear instancias de la clase A, ni declarar o retornar una variable que sea de un tipo de la clase A. De hecho la clase B tiene que pretender que la clase A no existe. Veamos el siguiente código de ejemplo:
+
+Tenemos una clase con *default access* dentro de un paquete llamado *cert*
+```java
+package cert;
+class Beverage { }
+```
+Y una segunda clase dentro de otro paquete que hereda la clase anterior.
+```java
+package exam.stuff;
+import cert.Beverage;
+class Tea extends Beverage { }
+```
+Como podemos ver ambas clases estan en distintos paquetes. La sentencia *import* arriba de la clase *Tea* intenta importar la clase Beverage. La clase Beverage compilará correctamente, pero cuando se intente compilar la clase Tea obtendremos un error de compilación como el siguiente:
+```java
+Cant access class cert.Beverage. Class or interface must be
+public, in same package, or an accessible member class.
+import cert.Beverage;
+```
+La clase *Tea* no compilara porque intenta heredar de una clase que se encuentra en otro paquete y que tiene *access default*. Para que funciones podemos poner ambas clases dentro de un mismo paquete o declarar la clase *Beverage*
+como *public*, como lo veremos a continuación.
+
+### Acceso Público (*public*)
+Una clase declarada como *public* le da acceso a todas las clases de todos los paquetes. No olvidar que si queremos usar esta clase *public* en otro paquete debemos realizar la importación de esta a través de la sentencia *import*.
+
+Si en el ejemplo anterior marcamos la clase *Beverage* como *public*
+```java
+package cert;
+public class Beverage { }
+```
+Al hacer este cambio, ambas clases *Beverage* y *Tea* compilaran correctamente.
+
+### Modificadores de No Acceso (*Nonaccess Modifiers*)
+Podemos modificar una clase con los modificadores *final*, *abstract* y *strictfp*. Estos modificadores son adicionales a los modificadores de acceso por lo que se podria marcar una clase como *public* y *final*. Pero no podemos usar ambas *final* y *abstract*, a diferencia de que sí se puede usar *strictfp* junto con *final*.
+
+No necesitamos saber como es que trabaja *strictfp*, ya que con enfocaremos solo en modificar una clase con *final* o *abstract*. Para el examen solo es necesario saber que *strictfp* es una palabra reservada y que puede ser usada para modificar una clase o un método, pero jamás una variable.
+
+### Clases Final (*final class*)
+Cuando marcamos una clase como *final* quiere decir que no puede ser heredada. En otras palabras, ninguna otra clase puede heredar o extender de una clase *final*, cualquier intento de esto resultará en un error de compilación.
+
+Podemos marcar una clase como *final* si y solo sí necesitamos la absoluta garantía de que ninguno de los métodos dentro de esa clase puedan ser sobreescritos.
+
+### Clases Abstractas (*abstract class*)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
