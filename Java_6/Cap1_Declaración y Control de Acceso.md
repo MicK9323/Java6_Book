@@ -416,8 +416,44 @@ El bit más a la izquierda es el más relevante e indica el signo, si es 1 es *n
 Las variables de referenca pueden ser declaradas como variables estáticas, instancias, parámetros de métodos o variables locales. Se pueden declarar más de una variables del mismo tipo en una sola linea. Se discutirá mas en detalle en el capítulo 3.
 
 ### Variables de Instancia
+Las variables de instancia son declaradas dentro de una clase, pero fuera de cualquier método y son inicializadas solo cuando la clase es instanciada. Las variables de instancia son los campos o atributos unicos que tendrán los objetos.
 
+- Las variables de instancia pueden ser declaradas con cualquier de los 4 modificadores de acceso.
+- Pueden ser declaradas como *final* y *trascient*.
+- No pueden ser declarados como *abstract, synchronized, strictfp o native*.
 
+### Variables Locales
+Las variables locales son variables declaradas dentro de un método. Esto quiere decir que no necesitan ser inicializadas dentro del método pero sí, declaradas junto con el.
+
+- Una variable local debe ser inicializada antes de poder ser usada.
+- Una variable local no puede ser referenciada en ningun lugar del código, mas que en el método en el cual fue declarado.
+
+### Declaración de arreglos
+En Java los arreglos son objetos que almacenar multiples variables de un mismo tipo ya sean de un tipo primitivo o de un objeto.
+
+```java
+// Arreglo de variables de tipo primitivo
+int[] key // Estándar con los corchetes antes del nombre del arreglo
+int key[] // Válido pero no recomendable
+```
+
+Podemos declarar arreglos multidimensionales que vendrian a ser arreglos de arreglos.
+
+```java
+String[][][] occupantName; // Arreglo tridimensional
+String[] manager[] managerName; // Arreglo bidimensional
+String[][] managerName; // Arreglo bidimensional
+```
+
+- Es incorrecto incluir la longitud de un arreglo en su declaración.
+
+### Variables *final*
+Declarar una variabla como *final* hace que sea imposible reiniciar la variable una vez que ha sido inicializada con un valor explícito.
+
+### Declarando Enums
+Un enum, también llamado enumeración o tipo enumerado es un tipo de dato definido por el usuario que solo puede tomar como valores los definidos en una lista.
+
+*...Conseguir información mas relevante y explícita sobre enums*
 
 
 
