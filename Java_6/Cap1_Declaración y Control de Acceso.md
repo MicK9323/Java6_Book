@@ -277,12 +277,145 @@ Los modificadores *protected* y *default* son muy parecidos. Pero hay una difere
 ### Métodos *final*
 El modificador *final* previene que un método sea anulado o sobreescrito en una subclase. Esta restricción de sobreescritura provee consistencia y seguridad, pero se deben usar con mucho cuidado.
 
+Ejemplo se tiene la siguiente clase:
+```java
+class SuperClass{
+    // final method
+    public final void showSample() {
+        System.out.println("One thing.");
+    }
+}
+```
+Heredamos en una subclase y tratamos de sobreescribir el m1étodo *showSample()*
+```java
+class SubClass extends SuperClass{
+    public void showSample() { 
+        // Try to override the final
+        // superclass method
+        System.out.println("Another thing.");
+    }
+}
+```
+Al intentar compilar tendremos un error de compilación como el siguiente:
+```java
+%javac FinalTest.java
+FinalTest.java:5: The method void showSample() declared in class
+SubClass cannot override the final method of the same signature
+declared in class SuperClass.
+Final methods cannot be overridden.
+public void showSample() { }
+1 error
+```
 
+### Argumentos *final*
+Los argumentos de un método, son las variables declaradas que aparecen entre los paréntesis en la definición de un método.
+```java
+public Record getRecord(int fileNumber, int recNumber) {}
+```
+Los argumentos son esencialmente lo mismo que las variables locales y se aplicaran las mismas reglas que estas. Esto quiere decir que los argumentos de un método pueden tener el modificador *final*.
+```java
+public Record getRecord(int fileNumber, final int recordNumber) {}
+```
+En el ejemplo anterior el argumento *recordNumber* esta declarada como *final*, lo que indica que no puede ser modificada dentro del método. En otras palabras esto quiere decir que el argumento *final* debe mantener el mismo valor que tiene cuando el método es invocado y se pasa un parámetro a este argumento.
 
+### Métodos Abstract (*abstract methods*)
+Un método abstracto es un método que puede ser declarado pero no implementado. Un método se declara como abstracto, cuando se quiere forzar la implementación en una subclase que la hereda.
 
+### Métodos Sincronizados (*Synchronized Methods*)
+La palabra reservada *synchronized* indica que un método solo puede ser accesido por un hilo a la vez. *synchronized* solo es aplicable a métodos. Su declaración es como la siguiente:
+```java
+public synchronized Record retrieveUserInfo(int id) { }
+```
+### Métodos Nativos (*Native methods*)
+El modificador *native* indica que un método es implementado en una plataforma de código dependiente. Se vera su funcionamiento más adelante. Este modificador solo puede ser aplicado a métodos y al igual que un método abstracto su declaración terminará en (;) y no en llaves ({}).
 
+### Métodos con Argumentos Variables
+Java permite crear métodos que pueden tener un número variable de argumentos. Esta capacidad es referenciada como: 
+*"variable-length argument lists," "variable arguments," "var-args," "varargs"* y en este libro la llamaremos *"var-args"*
+- **argumentos**: Es lo que se especifica entre paréntesis cuando se invoca un método.
+```java
+doStuff("a", 2); // invocando a doStuff, a & 2 son argumentos
+```
+- **parámetro**: Es lo que indica que debe recibir un método cuando este es invocado.
+```java
+void doStuff(String s, int a) { } 
+// Se espera 2 parámetros 1 String y 1 int.
+```
+Las reglas para declarar argumentos variables (*var-args*) son:
 
+- **Tipo de var-arg**: Cuando se declaran parámetros *var-arg* se debe especificar el tipo de argumento que este parámetro puede recibir cuando el método sea invocado. (Pueden ser de tipo primitivo o un objeto).
+- **Sintaxis Básica**: Al declarar un método con parámetros *var-arg*, al tipo de argumento le debe preceder una *ellipsis* (...) seguida de un espacio y el nombre del arreglo que contendrá los parámetros recibidos.
+- **Otros parámetros**: Es completamente válido tener otros parámetros en un método que use *var-arg*.
+- **Límite de var-arg**: No puede haber más de un argumento *var-arg* en un método, y este debe ser el último en declararse.
 
+Ejemplos:
+```java
+// Válido:
+void doStuff(int... x) { } // Se espera de 0 a muchos parámetros de tipo int
+void doStuff2(char c, int... x) { } // Se espera un parámetro tipo char y 0 o más parámetros tipo int
+void doStuff3(Animal... animal) { } // Se espera ninguno o muchos objetos de clase Animal.
+
+// Inválido
+void doStuff4(int x...) { } // Error de sintaxis
+void doStuff5(int... x, char... y) { } // Demasiados argumentos var-arg
+void doStuff6(String... s, byte b) { } // El argumento var-arg debe ser el último en declararse
+```
+
+### Declaración del Constructor
+En Java los objetos son construidos, cada vez que se crea un nuevo objeto de una clase es invocado un método constructor. Cada clase tiene un método constructor, si no se crea explicitamente, el compilador construye uno implícitamente en nuestro lugar. En el cap 2,veremos en detalle las reglas que conciernen a los constructores.
+
+Su definición es la siguiente:
+```java
+class Foo {
+    protected Foo() { } // Este es el constructor de Foo
+    protected void Foo() { } // Esta mal llamada, pero es un método valido
+}
+```
+- No debe retornar ningun tipo.
+- Debe tener el mismo nombre que la clase.
+- Un constructor puede tener modificadores de acceso y argumentos incluso argumentos *var-arg*.
+- No puede ser definido como *static*, *final* o *abstract*.
+```java
+class Foo2 {
+    // legal constructors
+    Foo2() { }
+    private Foo2(byte b) { }
+    Foo2(int x) { }
+    Foo2(int x, int... y) { }
+    // illegal constructors
+    void Foo2() { } // Es un método y no un constructor
+    Foo() { } // No es un método ni un constructor
+    Foo2(short s); // Parece un método abstracto.
+    static Foo2(float f) { } // No puede ser statico
+    final Foo2(long x) { } // No puede ser final
+    abstract Foo2(char c) { } // No puede ser abstracto
+    Foo2(int... x, int t) { } // Error de sintaxis en la declaracion del argumento var-arg
+}
+```
+### Declaración de Varibles
+Hay 2 tipos de variables en Java
+- **Primitivas**: Una variable puede ser una de 8 tipos: *char, boolean, byte, short, int, long, double o float*. Cuando una variable primitiva es declarada su tipo no podrá ser cambiado, sin embargo en muchos casos su valor podrá cambiar.
+
+- **Variables de referencia**: Una variable de referencia se usa para acceder o hacer referencia a un Objeto. Una variable de referencia es declarada para ser de un tipo específico y no podra ser cambiada.
+
+### Declaración de tipos y rangos primitivos
+Los 6 tipos de números primitivos en Java estan formados por un cierto número de bytes de 8 bits y pueden ser *positivos* y *negativos*.
+
+El bit más a la izquierda es el más relevante e indica el signo, si es 1 es *negativo* y si es 0 es *positivo*, los otros bits representan el valor.
+
+|**Tipos**|**Bits**|**Bytes**|**Valor Mínimo**|**Valor Máximo**|
+|---------------|----------|-------------|-----------|-----------|
+|byte|8|1|-2<sup>7</sup>|2<sup>7</sup>-1|
+|short|16|2|-2<sup>15</sup>|2<sup>15</sup>-1|
+|int|32|si|4|-2<sup>31</sup>|2<sup>31</sup>-1|
+|long|64|8|-2<sup>63</sup>|2<sup>63</sup>-1|
+|float|32|4|n/a|n/a|
+|double|64|8|n/a|n/a|
+
+### Declarando Variables de Referencia
+Las variables de referenca pueden ser declaradas como variables estáticas, instancias, parámetros de métodos o variables locales. Se pueden declarar más de una variables del mismo tipo en una sola linea. Se discutirá mas en detalle en el capítulo 3.
+
+### Variables de Instancia
 
 
 
