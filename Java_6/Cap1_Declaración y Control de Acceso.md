@@ -174,7 +174,108 @@ Cuando marcamos una clase como *final* quiere decir que no puede ser heredada. E
 Podemos marcar una clase como *final* si y solo sí necesitamos la absoluta garantía de que ninguno de los métodos dentro de esa clase puedan ser sobreescritos.
 
 ### Clases Abstractas (*abstract class*)
+Una clase abstracta no puede ser instanciada, solo puede ser heredada.
 
+Podriamos usar clases abstractas, cuando querramos englobar objetos de distintos tipos y hacer uso del polimorfismo.
+
+Por ejemplo, podriamos tener una clase abstract *Figura* que define el método *area()*, notemos que figura es una generalización y que no tendria sentido definir el area de una figura. Sin embargo podremos heredarla en una clase como *Cuadrado* o *Circulo* donde sí podriamos implementar el método definido en la superclase abstracta *Figura*
+
+```java
+// Clase abstracta Figura
+public abstract class Figura {
+    protected double x;
+    protected double y;
+
+    public Figura (double x, double y) {
+        this.x = y;
+        this.y = y;
+    }
+
+    public abstract double area();
+}
+
+public class Circulo extends Figura {
+    private double radio;
+
+    public Circulo (double x, double y, double radio) {
+        super(x,y);
+        this.radio = radio;
+    }
+
+    public double area() {
+        return Math.PI*radio*radio;
+    }
+}
+
+public class Cuadrado extends Figura {
+    private double lado;
+
+    public Circulo (double x, double y, double lado) {
+        super(x,y);
+        this.lado = lado;
+    }
+
+    public double area() {
+        return lado*lado;
+    }
+}
+```
+
+## 4. Declaración de Interfaces
+___
+Una interfaz en palabras simples, *es una clase completamente abstracta, es decir una clase sin implementación*. 
+
+Cuando creamos una *interfaz*, definimos un contrato de *que es lo que hará una clase, más no de como lo hará*
+
+### Caracteristicas de una interfaz
+
+- Mientras una clase abstracta puede definir tanto métodos abstractos y no abstractos, una interfaz solo puede definir métodos implícitamente públicos y abstractos.
+
+- Todas las variables definidas en una interfaz, deben ser *public*, *static* y *final*, es decir una interfaz solo puede declarar ***Constantes***.
+- Una interfaz puede extender o heredar de una o más interfaces. Pero jamás de una clase.
+- Una interfaz no puede implementar otra interfaz o clase.
+- Deben ser declaradas usando la palabra reservada *interface*.
+- Si una clase implementa una interfaz, esta debe implementar todos los métodos definidos en la interfaz.
+
+## 5. Declaración de Miembros de Clase.
+___
+
+Los métodos y variables son tambien llamados miembros. Podemos modificar los miembros con modificadores de acceso y de no acceso o de una combinación de ambos.
+
+Se puede acceder a un método o variable de una clase haciendo uso del operador (**.**).
+
+## Modificadores de Acceso
+
+### Miembros Públicos
+Cuando un miembro es declarado como *public*, significa que todas las clases independientemente del paquete al que pertenezcan, tienen acceso a este miembro. Para una subclase si un miembro de su superclase es declarada como *public* , la subclase puede heredar este miembro independientemente del paquete de ambas clases.
+
+Formas de acceso:
+- Invocando un miembro declarado en la misma clase.
+- Invocando un miembreo usando una referencia de la clase.
+- Invocando un método heredado.
+
+### Miembros Privados
+Los miembros declarados como *private* no pueden ser accesidos por otra clase más que en la que fue declarada.
+
+Formas de acceso:
+- Invocando un miembro declarado en la misma clase.
+  
+### Protected y Default
+Los modificadores *protected* y *default* son muy parecidos. Pero hay una diferencia muy significativa. Un miembro declarado como *default* puede ser accesido solo si la clase pertenece al mismo paquete, mientras que un miembro declarado como *protected* solo puede ser accesido por medio de *herencia* a través de una subclase, sin importar el paquete al que pertenesca ó si la clase pertenece al mismo paquete.
+
+### Tabla de visibilidad
+
+|**Visibilidad**|**public**|**protected**|**default**|**private**|
+|---------------|----------|-------------|-----------|-----------|
+|Desde la misma clase|si|si|si|si|
+|Desde la cualquier clase en el mismo paquete|si|si|si|no|
+|Desde una subclase en el mismo paquete|si|si|si|no|
+|Desde una subclase en otro paquete|si|solo por herencia|no|no|
+|Desde una clase en otro paquete|si|no|no|no|
+
+## Modificadores de no-acceso aplicados a métodos
+### Métodos *final*
+El modificador *final* previene que un método sea anulado o sobreescrito en una subclase. Esta restricción de sobreescritura provee consistencia y seguridad, pero se deben usar con mucho cuidado.
 
 
 
