@@ -262,10 +262,77 @@ La implementación de interfaces debe seguir las siguientes reglas:
 
 ## 7. Tipos de Retorno
 ___
+Necesitamos recordar 6 reglas al momento de retornar un valor.
 
+1. Se puede retornar *null* en un método que retorna algun Objeto de una clase.
+```java
+public Button doStuff() {
+    return null;
+}
+```
+
+2. Es correcto retornar un arreglo.
+```java
+public String[] go() {
+    return new String[] {"Fred", "Barney", "Wilma"};
+}
+```
+
+3. En un método que retorna un tipo primitivo, puedes retornar cualquier tipo o valor que pueda ser implícitamente convertido a el tipo de retorno declarado.
+```java
+public int foo() {
+    char c = 'c';
+    return c; // char is compatible with int
+}
+```
+
+4. En un método que retorna un tipo primitivo, puedes retornar cualquier tipo o valor que pueda ser explicitamente convertido al tipo de retorno declarado mediante *cast*.
+```java
+public int foo () {
+    float f = 32.5f;
+    return (int) f;
+}
+```
+
+5. No puede haber *return* en un método tipo *void*.
+```java
+public void bar() {
+    return "this is it"; // Not legal!!
+}
+```
+
+6. En un método que retorna una referencia a un objeto, puedes retornar cualquier tipo o que pueda ser implicitamente convertido al tipo de retorno declarado.
+```java
+public Animal getAnimal() {
+    return new Horse(); // Assume Horse extends Animal
+}
+public Object getObject() {
+    int[] nums = {1,2,3};
+    return nums; // Return an int array,
+    // which is still an object
+}
+public interface Chewable { }
+public class Gum implements Chewable { }
+public class TestChewable {
+    // Method with an interface return type
+    public Chewable getChewable() {
+    return new Gum(); // Return interface implementer
+}
+}
+```
 
 ## 8. Constructores e Instancias
 ___
+Los objetos son construidos, no se puede instanciar un objeto sin antes invocar a su constructor. Los constructores son las lineas de código que correran cundo usemos *new*.
+
+### Constructores básicos
+Toda clase incluidas las abstractas deben tener un *constructor*. Pero solo porque se dija esto, no quiere decir que por cada clase debamos escribir al menos un constructor.
+
+2 puntos clave que debemos recordar sobre los constructores es que:
+- Los constructores no tienen tipo de retorno.
+- Su nombre debe ser exactamente el mismo que el nombre de la clase.
+
+Es muy común (y es aconsejable) que una clase tenga un constructor sin argumentos, independientemente de como lo sobrecargen otros constructores. (Los constructores pueden ser sobrecargados)
 
 ## 9. Estáticos
 ___
