@@ -214,7 +214,7 @@ La sobrecarga de métodos permite el uso de un mismo nombre de método pero con 
 - La sobrecarga de métodos **puede** cambiar el tipo de retorno.
 - La sobrecarga de métodos **puede** cambiar el modificador de acceso.
 - La sobrecarga de método **puede** ejecutar excepciones nuevas o comprobadas.
-- Un método puede ser sobrecargado en su misma clase o en una subclase.
+- Un método **puede** ser sobrecargado en su misma clase o en una subclase.
 
 ```java
 class Animal { }
@@ -241,11 +241,28 @@ class UseAnimals {
 ## 5. Casting
 ___
 
+*Buscar otra fuente*
+
 ## 6. Implementación de Interfaces
 ___
 
+Cuando implementas una interfaz, aceptas el contrato definido en la interfaz. Esto significa que estas aceptando implementar cada método definido en la interfaz.
+
+La implementación de interfaces debe seguir las siguientes reglas:
+
+- Proveer la implementación de todos los métodos declarados en la interfaz.
+- Seguir todas las reglas para una válida sobreescritura.
+- Pueden declarar excepciones no comprobadas o subclases de las excepciones declaradas en la definición del método.
+- Mantener la forma del método definido en la interfaz, el mismo tipo de retorno (o un subtipo).
+- Si una interfaz se implementa en una clase abstracta, no es obligatorio implementar los métodos de la interfaz en esta clase, pero si la primera subclase no abstract de esta.
+- Una clase puede implementar más de una interfaz.
+- Una interfaz puede heredar de otra interfaz pero no implementarla.
+- Una clase no puede implementar otra clase.
+- Si una clase extiende de otra y a la vez implementa una o más interfaces, primero se debe declarar la herencia de la superclase y luego las implementaciones de las interfaces.
+
 ## 7. Tipos de Retorno
 ___
+
 
 ## 8. Constructores e Instancias
 ___
