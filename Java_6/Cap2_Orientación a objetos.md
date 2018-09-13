@@ -103,7 +103,7 @@ Recordemos que:
 
 ## 4. Sobreescritura y Sobrecarga
 ___
-### Sobreescribir un método
+### Sobreescritura de un método
 Siempre que se tenga una clase que herede un método de una superclase, tenemos las oportunidad de sobreescribir este método (a menos que el método haya sido declarado como *final* en la superclase). Esto nos permite definir comportamientos específicos para una subclase en particular.
 
 Ejemplo:
@@ -207,6 +207,36 @@ class Horse extends Animal {
 |public void eat(String food) { }|Es una sobrescarga, más no una sobreescritura ya que los argumentos han cambiado.
 |public String eat() { }|No es una sobreescritura porque cambia el tipo de retorno y no es una sobrecarga porque no ha cambiado el número de argumentos.
 
+### Sobrecarga de métodos
+La sobrecarga de métodos permite el uso de un mismo nombre de método pero con diferentes argumentos (opcional y distinto tipo de retorno). Las reglas son simples:
+
+- La sobrecarga de métodos **debe** cambiar la lista de argumentos.
+- La sobrecarga de métodos **puede** cambiar el tipo de retorno.
+- La sobrecarga de métodos **puede** cambiar el modificador de acceso.
+- La sobrecarga de método **puede** ejecutar excepciones nuevas o comprobadas.
+- Un método puede ser sobrecargado en su misma clase o en una subclase.
+
+```java
+class Animal { }
+class Horse extends Animal { }
+class UseAnimals {
+    // Métodos sobrecargados
+    public void doStuff(Animal a) {
+        System.out.println("In the Animal version");
+    }
+    public void doStuff(Horse h) {
+        System.out.println("In the Horse version");
+    }
+
+    public static void main (String [] args) {
+        UseAnimals ua = new UseAnimals();
+        Animal animalObj = new Animal();
+        Horse horseObj = new Horse();
+        ua.doStuff(animalObj);
+        ua.doStuff(horseObj);
+    }
+}
+```
 
 ## 5. Casting
 ___
