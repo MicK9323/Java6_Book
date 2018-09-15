@@ -407,7 +407,7 @@ El bit más a la izquierda es el más relevante e indica el signo, si es 1 es *n
 |---------------|----------|-------------|-----------|-----------|
 |byte|8|1|-2<sup>7</sup>|2<sup>7</sup>-1|
 |short|16|2|-2<sup>15</sup>|2<sup>15</sup>-1|
-|int|32|si|4|-2<sup>31</sup>|2<sup>31</sup>-1|
+|int|32|4|-2<sup>31</sup>|2<sup>31</sup>-1|
 |long|64|8|-2<sup>63</sup>|2<sup>63</sup>-1|
 |float|32|4|n/a|n/a|
 |double|64|8|n/a|n/a|
