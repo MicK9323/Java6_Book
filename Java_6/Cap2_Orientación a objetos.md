@@ -332,7 +332,7 @@ Toda clase incluidas las abstractas deben tener un *constructor*. Pero solo porq
 - Los constructores no tienen tipo de retorno.
 - Su nombre debe ser exactamente el mismo que el nombre de la clase.
 
-Es muy común (y es aconsejable) que una clase tenga un constructor sin argumentos, independientemente de como lo sobrecargen otros constructores. (Los constructores pueden ser sobrecargados)
+Es muy común (y es aconsejable) que una clase tenga un constructor sin argumentos, independientemente de como lo sobrecargen otros constructores. (Los constructores pueden ser sobrecargados). Sin embargo algunas clases suelen pedir uno o más argumentos para su construcción como la clase *java.awt.Color*
 
 ## 9. Estáticos
 ___
