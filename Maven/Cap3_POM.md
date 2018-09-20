@@ -39,7 +39,7 @@ Cabe señalar que solo existira un archivo POM para cada proyecto.
   
   |**Nodo**|**Descripción**|
   |--------|---------------|
-  |*Project root*|Esta es la etiqueta raiz. Se tiene que espicificar la configuración del esquema como el esquema de apache y la definición de w3.org|
+  |*Project root*|Esta es la etiqueta raiz. Se tiene que especificar la configuración del esquema como el esquema de apache y la definición de w3.org|
   |*Model version*|El *model version* Debera ser 4.0.0|
   |*groupId*|Este un ID del grupo del proyecto. Es generalmente único entre una organización o un proyecto.|
   |*artifactId*|Este un ID para el proyecto. Es generalmente el nombre del proyecto|
@@ -49,3 +49,5 @@ Cabe señalar que solo existira un archivo POM para cada proyecto.
 El super POM es el POM por defecto de *Maven*. Todos los POMs heredan de un padre o un POM base. Esta base es conocida como **Super POM** y contiene valores heredados por defecto.
 
 Una forma facil de ver las configuraciones por defecto es ejecutando el comando: ***mvn help:effective-pom.***
+
+Esto generará un fichero xml con la estructura por defecto del proyecto, directorios de salida, plugins necesarios, repositorios, directorio de reportes que *Maven* usará mientras ejecuta un *goal* (meta).
