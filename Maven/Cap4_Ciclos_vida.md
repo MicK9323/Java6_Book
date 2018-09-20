@@ -75,4 +75,13 @@ Hay algunos conceptos relacionados a *Maven* los cuales dicen que:
 
 ## Ciclo de Vida *Site*
 
+El plugin *site* de maven es generalmente usado para generar documentación, reportes, sitios de despliege, etc.
 
+Tiene las siguientes fases:
+
+- *pre-site*
+- *site*
+- *post-site*
+- *site-deploy*
+
+*Buscar más fuentes sobre el plugin site*
