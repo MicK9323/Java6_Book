@@ -120,3 +120,6 @@ Los ejemplos anteriores describen los siguientes conceptos:
 
 - Los *plugins* son especificados dentro del pom.xml, usando los elementos *\<plugins/\>* y *\<plugin/\>*.
 - Cada *plugin* puede tener multiples *goals*.
+- Podemos definir la fase desde donde el *plugin* iniciará el proceso. En el ejemplo hemos usado la fase *clean*.
+- Podemos configurar las tareas que se ejecutarán vinculandolas a los *goals* del *plugin*. En el ejemplo hemos vinculado la tarea *echo* con el *goal* de *maven-antrun-plugin*.
+- Maven descargará el plugin en el repositorio local si no esta disponoble y luego comenzará el proceso.
