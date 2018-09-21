@@ -35,4 +35,56 @@ Cuando se vuelva a ejecutar un comando Maven, se descargaran las dependencias de
 
 El repositorio central de maven, es un repositorio suministrado por la comunidad de Maven. Y contiene un largo número de librerias comunmente usadas.
 
+Cuando Maven no encuentra una dependencia en el repositorio local, este comienza a buscar en el repositorio central a través de la siguiente *URL: http://repo1.maven.org/maven2/*
 
+- Este repositorio es administrado por la comunidad de Maven.
+- No requiere configuración.
+- Requiere de una conexión a internet para que pueda realizar la busqueda de dependencias.
+
+## Repositorio Remoto
+
+En ocasiones Maven no encontrará una dependencia en el repositorio central, por consiguiente detendra el proceso de compilación y mostrara un mensaje de error en la consola. Para prevenir situaciones como esta, Maven nos da el concepto de *Repositorios Remotos*, los cuales son de propiedad del desarrollador y puede contener las dependencias necesarias o *jars* de otros proyectos.
+
+Por ejemplo usando la siguiente configuración en el POM, Maven podrá descargar librerias desde el repositorio indicado en la configuración.
+
+```xml
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.companyname.projectgroup</groupId>
+    <artifactId>project</artifactId>
+    <version>1.0</version>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.companyname.common-lib</groupId>
+            <artifactId>common-lib</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+    <dependencies>
+
+    <repositories>
+        <repository>
+            <id>companyname.lib1</id>
+            <url>http://download.companyname.org/maven2/lib1</url>
+        </repository>
+        <repository>
+            <id>companyname.lib2</id>
+            <url>http://download.companyname.org/maven2/lib2</url>
+        </repository>
+    </repositories>
+
+</project>
+```
+
+## Secuencia de Busqueda de Maven
+
+Cuando ejecutamos el comando *build*, Maven empieza a buscar las librerias en la siguiente secuencia:
+
+1. Busca las dependencias en el repositorio local, si no las encuentra, pasa al paso 2.
+2. Busca y descarga las dependencias desde el repositorio central, si no las encuentra y hay repositorios remotos definidos en el POM, pasa al paso 4.
+3. Si han fallado las busquedas anteriores y no hay repositorios remotos definidos en el POM, se detiene el proceso de compilación y se lanza el error: *Unable to find dependency*.
+4. Busca y descarga las dependencias desde el repositorio remoto. Caso contrario detiene el proceso y lanza el error *Unable to find dependency*.
