@@ -15,13 +15,13 @@ Estos plugins generalente se usan para:
 
 Un *plugin* generalmente proporciona un juego de *goals*, que pueden ser ejecutados usando la siguiente sintáxis.
 
-```cmd
+```text
 mvn [plugin-name]:[goal-name]
 ```
 
 Por ejemplo un proyecto java puede ser compilado ejecutando el siguiente comando:
 
-```cmd
+```text
 mvn compiler:compile
 ```
 
@@ -85,13 +85,13 @@ Crearemos el siguente archivo pom.xml
 
 Luego abriremos la consola de comandos y nos ubicaremos en la carpeta que contiene el archivo *pom.xml* y ejecutaremos el comando.
 
-```cmd
+```text
 mvn clean
 ```
 
 Maven iniciará el proceso y mostrará la fase *clean* del ciclo de vida *clean*.
 
-```cmd
+```text
 [INFO] Scanning for projects...
 [INFO] -----------------------------------------------------------------
 -
